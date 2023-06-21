@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponse
-
+from .models import Vacancy
 
 # Create your views here.
 
+
 def homepage(request):
-    return HttpResponse('hi')
+    return render(request=request, template_name="index.html")
 
 
 def about(request):
@@ -19,3 +20,9 @@ def address(request):
     return HttpResponse('<ul> <li>test@mail.com</li> <li>test2@mail.com</li> </ul>'
                         '<ol> <li>test@mail.com</li> <li>test2@mail.com</li> </ol>')
 
+
+def vacancy_list(request):
+    vacancies = Vacancy.objects.all()  # SELECT in django ORM
+    context = {'vacancies': vacancies}  # context data for jinja2
+    # context['example'] = 'hello world'
+    return render(request, 'vacancies.html', context)

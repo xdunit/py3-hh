@@ -33,3 +33,13 @@ git push
 # клонирование
 # cd projectFolder
 # git clone https://github.com/Amankaium/py3-hh.git
+
+#Models
+создать класс(models) в core.models
+# make migrations(синхронизирует наши модели и базы данных)
+python manage.py makemigrations
+python manage.py migrate
+
+
+#добавляем его в админку
+
