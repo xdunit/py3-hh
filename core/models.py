@@ -14,3 +14,17 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    employees_num = models.SmallIntegerField(null=False)
+    is_hunting = models.BooleanField(default=True, verbose_name='Есть вакансии?')
+
+    def __str__(self):
+        return self.name
+
+
+
+

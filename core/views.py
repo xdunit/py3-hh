@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Vacancy
+from .models import Company
+
 
 # Create your views here.
 
@@ -26,3 +28,10 @@ def vacancy_list(request):
     context = {'vacancies': vacancies}  # context data for jinja2
     # context['example'] = 'hello world'
     return render(request, 'vacancies.html', context)
+
+
+def company_list(request):
+    companies = Company.objects.all()
+    context = {'companies': companies}
+    return render(request, 'companies.html', context)
+
