@@ -24,3 +24,16 @@ class Comment(models.Model):
     def __str__(self):
         return self.author.username
 
+
+class Resume(models.Model):
+    name = models.ForeignKey(to=Worker, on_delete=models.CASCADE)
+    age = models.SmallIntegerField(null=False)
+    specialization = models.CharField(max_length=255)
+    info = models.TextField(verbose_name='Расскажите о себе')
+
+    def __str__(self):
+        return self.specialization
+
+
+
+
