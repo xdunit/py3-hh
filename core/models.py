@@ -15,9 +15,24 @@ class Vacancy(models.Model):
     contacts = models.CharField(max_length=100, verbose_name='Контакты')
     candidate = models.ManyToManyField(to=Worker, blank=True)
     review = models.ManyToManyField(to=User, blank=True)
+    category = models.ForeignKey(to='Category', null=True, blank=False, verbose_name='категория',
+                                 on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Вакансия'
+        verbose_name_plural = 'Вакансии'
+        ordering = ['salary']
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Company(models.Model):
@@ -28,7 +43,3 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
