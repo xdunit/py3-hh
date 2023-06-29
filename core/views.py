@@ -35,3 +35,11 @@ def company_list(request):
     context = {'companies': companies}
     return render(request, 'companies.html', context)
 
+
+def vacancy_details(request, id):
+    vacancy = Vacancy.objects.get(id=id)
+    candidates = vacancy.candidate.all()
+    context = {'vacancy': vacancy,
+               'candidates': candidates}
+
+    return render(request, 'v_details.html', context)

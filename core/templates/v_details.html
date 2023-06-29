@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ vacancy.title }}</h1>
+    <h2>Кандидаты</h2>
+    <ul>
+    {% for candidate in candidates %}
+        <li>{{ candidate.name }}</li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}

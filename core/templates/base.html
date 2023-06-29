@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Домой</a> |
+        <a href="/vacancies">Вакансии</a> |
+        <a href="/workers">Кандидаты</a> |
+        <a href="/about">АНАНАС!</a> |
+        <a href="/companies">Компании</a> |
+        <a href="{% url 'my-resume' %}">Мои Резюме</a> |
+         {% if request.user.is_authenticated %}
+            Привет, {{ request.user.username }}!
+        {% else %}
+            Пожалуйста, авторизуйтесь
+        {% endif %}
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <br>
+    <footer>
+        <hr>
+        88005355<br/>
+        Адрес: Бишкек, 7 м-н
+    </footer>
+</body>
+</html>
