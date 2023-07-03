@@ -19,7 +19,6 @@ from django.urls import path
 from core.views import *
 from worker.views import *
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
@@ -35,6 +34,9 @@ urlpatterns = [
     path('my-resume/', my_resume, name='my-resume'),
     path('vacancy/<int:id>/', vacancy_details),
     path('search/', search, name='search'),
-    path('add-resume/', add_resume, name='add-resume')
+    path('add-resume/', add_resume, name='add-resume'),
+    path('registration/', reg_view, name='reg'),
+    path('add-vacancy/', add_vacancy, name='add_vacancy'),
+    path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit')
 
 ]

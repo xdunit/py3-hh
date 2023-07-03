@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Vacancy
 from .models import Company
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -52,3 +53,59 @@ def search(request):
     return render(request, 'vacancies.html', context)
 
 
+def reg_view(request):
+    if request.method == 'POST':
+        user = User(
+            username=request.POST['username']
+        )
+        user.save()
+        user.set_password(request.POST['password'])
+        user.save()
+        return HttpResponse('Готово')
+
+    return render(request, 'auth/registr.html')
+
+
+def add_vacancy(request):
+    if request.method == 'POST':
+        new_vacancy = Vacancy(
+            title=request.POST['title'],
+            salary=int(request.POST['salary']),
+            description=request.POST['description'],
+            is_relevant=request.POST['is_relevant'],
+            email=request.POST['email'],
+            contacts=request.POST['contacts'],
+            # candidate=request.POST['candidate'],
+            # review=request.POST['review'],
+            # category=request.POST['category']
+        )
+        new_vacancy.save()
+        return redirect(f'/vacancy/{new_vacancy.id}/')
+
+    return render(request, 'vacancy/add_vacancy.html')
+
+
+def vacancy_edit(request, id):
+    vacancy = Vacancy.objects.get(id=id)
+    if request.method == 'POST':
+        vacancy = Vacancy(
+            title=request.POST['title'],
+            salary=int(request.POST['salary']),
+            description=request.POST['description'],
+            is_relevant=request.POST['is_relevant'],
+            email=request.POST['email'],
+            contacts=request.POST['contacts'],
+            # candidate=request.POST['candidate'],
+            # review=request.POST['review'],
+            # category=request.POST['category']
+        )
+        vacancy.title = request.POST['title'],
+        vacancy.salary = int(request.POST['salary']),
+        vacancy.description = request.POST['description'],
+        vacancy.is_relevant = request.POST['is_relevant'],
+        vacancy.mail = request.POST['email'],
+        vacancy.contacts = request.POST['contacts'],
+        vacancy.save()
+        return redirect(f'/vacancy/{vacancy.id}/')
+
+    return render(request, 'vacancy/vacancy_edit_form.html', {'vacancy': vacancy})
