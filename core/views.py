@@ -42,4 +42,13 @@ def vacancy_details(request, id):
     context = {'vacancy': vacancy,
                'candidates': candidates}
 
-    return render(request, 'v_details.html', context)
+    return render(request, 'v_details/v_details.html', context)
+
+
+def search(request):
+    word = request.GET["keyword"]
+    vacancy_list = Vacancy.objects.filter(title__contains=word)
+    context = {'vacancies': vacancy_list}
+    return render(request, 'vacancies.html', context)
+
+
