@@ -15,10 +15,10 @@
         <a href="/workers">Кандидаты</a> |
         <a href="/about">АНАНАС!</a> |
         <a href="/companies">Компании</a> |
-        <a href="/resume-list">Резюме</a> |
+        <a href="/resume-list">Все Резюме</a> |
          {% if request.user.is_authenticated %}
         <a href="{% url 'my-resume' %}">Мои Резюме</a> |
-        <a href="{% url 'add-resume' %}">Добавить</a> |
+        <a href="{% url 'add-resume' %}">Добавить резюме</a> |
             Привет, {{ request.user.username }}!
         {% else %}
             <a href="{% url 'reg' %}">Регистрация</a>

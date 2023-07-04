@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -5,5 +6,9 @@
     <h1>{{ resume.name }}</h1>
     <div>{{ resume.specialization }}</div>
     <div>{{ resume.info }}</div>
+
+    {% if resume %}
+        <a href="/resume-edit/{{ resume.id }}/">Редактировать Резюме</a>
+    {% endif %}
 
 {% endblock %}

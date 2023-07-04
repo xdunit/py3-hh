@@ -75,9 +75,6 @@ def add_vacancy(request):
             is_relevant=request.POST['is_relevant'],
             email=request.POST['email'],
             contacts=request.POST['contacts'],
-            # candidate=request.POST['candidate'],
-            # review=request.POST['review'],
-            # category=request.POST['category']
         )
         new_vacancy.save()
         return redirect(f'/vacancy/{new_vacancy.id}/')
@@ -88,24 +85,15 @@ def add_vacancy(request):
 def vacancy_edit(request, id):
     vacancy = Vacancy.objects.get(id=id)
     if request.method == 'POST':
-        vacancy = Vacancy(
-            title=request.POST['title'],
-            salary=int(request.POST['salary']),
-            description=request.POST['description'],
-            is_relevant=request.POST['is_relevant'],
-            email=request.POST['email'],
-            contacts=request.POST['contacts'],
-            # candidate=request.POST['candidate'],
-            # review=request.POST['review'],
-            # category=request.POST['category']
-        )
-        vacancy.title = request.POST['title'],
-        vacancy.salary = int(request.POST['salary']),
-        vacancy.description = request.POST['description'],
-        vacancy.is_relevant = request.POST['is_relevant'],
-        vacancy.mail = request.POST['email'],
-        vacancy.contacts = request.POST['contacts'],
+        vacancy.title = request.POST['title']
+        vacancy.salary = int(request.POST['salary'])
+        vacancy.description = request.POST['description']
+        vacancy.is_relevant = request.POST['is_relevant']
+        vacancy.email = request.POST['email']
+        vacancy.contacts = request.POST['contacts']
         vacancy.save()
         return redirect(f'/vacancy/{vacancy.id}/')
 
     return render(request, 'vacancy/vacancy_edit_form.html', {'vacancy': vacancy})
+
+

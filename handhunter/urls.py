@@ -19,6 +19,7 @@ from django.urls import path
 from core.views import *
 from worker.views import *
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
@@ -37,6 +38,8 @@ urlpatterns = [
     path('add-resume/', add_resume, name='add-resume'),
     path('registration/', reg_view, name='reg'),
     path('add-vacancy/', add_vacancy, name='add_vacancy'),
-    path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit')
+    path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
+    path('resume-edit/<int:id>/', resume_edit)
+
 
 ]

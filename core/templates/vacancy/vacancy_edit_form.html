@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <form method="POST">
+<form method="POST">
     {% csrf_token %}
     <input type="text" name="title" placeholder="title of vacancy" value="{{ vacancy.title }}"><br><br>
     <input type="number" name="salary" placeholder="Зарплата" value="{{ vacancy.salary }}"><br><br>
-    <textarea name="description" cols="20" rows="5" placeholder="Описание" value="{{ vacancy.description }}>"</textarea><br><br>
-    <input type="text" name="is_relevant" placeholder="is_relevant: True or False"><br><br>
+    <textarea name="description" cols="20" rows="5" placeholder="description">{{ vacancy.description }}</textarea><br><br>
+    <input type="text" name="is_relevant" placeholder="is_relevant: True or False" value="{{ vacancy.is_relevant }}"><br><br>
     <input type="email" name="email" placeholder="email" value="{{ vacancy.email }}"><br><br>
     <input type="text" name="contacts" placeholder="contacts" value="{{ vacancy.contacts }}"><br><br>
-<!--    <input type="text" name="candidate" placeholder="candidate">-->
-<!--    <input type="text" name="review" placeholder="review">-->
-<!--    <input type="text" name="category" placeholder="category">-->
     <button>Изменить</button>
-  </form>
+</form>
 
 {% endblock %}
