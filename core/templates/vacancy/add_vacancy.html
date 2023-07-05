@@ -3,15 +3,12 @@
 
   <form method="POST">
     {% csrf_token %}
-    <input type="text" name="title" placeholder="title of vacancy"><br><br>
+    <input type="text" name="title" placeholder="title of vacancy" required><br><br>
     <input type="number" name="salary" placeholder="Зарплата"><br><br>
     <textarea name="description" cols="20" rows="5" placeholder="Описание"></textarea><br><br>
     <input type="text" name="is_relevant" placeholder="is_relevant: True or False"><br><br>
     <input type="email" name="email" placeholder="email"><br><br>
     <input type="text" name="contacts" placeholder="contacts"><br><br>
-<!--    <input type="text" name="candidate" placeholder="candidate">-->
-<!--    <input type="text" name="review" placeholder="review">-->
-<!--    <input type="text" name="category" placeholder="category">-->
     <button>Добавить</button>
   </form>
 

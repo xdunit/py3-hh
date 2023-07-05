@@ -11,4 +11,6 @@
         <a href="/resume-edit/{{ resume.id }}/">Редактировать Резюме</a>
     {% endif %}
 
+    <a href="{% url 'resume-edit' resume.id %}">Изменить через django</a>
+
 {% endblock %}

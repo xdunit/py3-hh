@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Vacancy
 from .models import Company
+from .forms import VacancyForm
 from django.contrib.auth.models import User
 
 
@@ -82,6 +83,17 @@ def add_vacancy(request):
     return render(request, 'vacancy/add_vacancy.html')
 
 
+def vacancy_add_via_django_form(request):
+    if request.method == 'POST':
+        form = VacancyForm(request.POST)
+        if form.is_valid():
+            new_vacancy = form.save()
+            return redirect(f'/vacancy/{new_vacancy.id}')
+
+    vacancy_form = VacancyForm()
+    return render(request, 'vacancy/vacancy_django_form.html', {'vacancy_form': vacancy_form})
+
+
 def vacancy_edit(request, id):
     vacancy = Vacancy.objects.get(id=id)
     if request.method == 'POST':
@@ -95,5 +107,3 @@ def vacancy_edit(request, id):
         return redirect(f'/vacancy/{vacancy.id}/')
 
     return render(request, 'vacancy/vacancy_edit_form.html', {'vacancy': vacancy})
-
-
