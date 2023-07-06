@@ -8,9 +8,9 @@
     <div>{{ resume.info }}</div>
 
     {% if resume %}
-        <a href="/resume-edit/{{ resume.id }}/">Редактировать Резюме</a>
+        <a href="{% url 'resume-edit' id=resume.id %}">Редактировать Резюме</a>
     {% endif %}
-
     <a href="{% url 'resume-edit' resume.id %}">Изменить через django</a>
+
 
 {% endblock %}

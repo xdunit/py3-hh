@@ -2,6 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import Vacancy
 from .models import Company
 from .forms import VacancyForm
+from .forms import VacancyEditDj
+from .forms import CompanyAdd
+from .forms import CompanyEdit
+
 from django.contrib.auth.models import User
 
 
@@ -30,12 +34,6 @@ def vacancy_list(request):
     context = {'vacancies': vacancies}  # context data for jinja2
     # context['example'] = 'hello world'
     return render(request, 'vacancies.html', context)
-
-
-def company_list(request):
-    companies = Company.objects.all()
-    context = {'companies': companies}
-    return render(request, 'companies.html', context)
 
 
 def vacancy_details(request, id):
@@ -107,3 +105,54 @@ def vacancy_edit(request, id):
         return redirect(f'/vacancy/{vacancy.id}/')
 
     return render(request, 'vacancy/vacancy_edit_form.html', {'vacancy': vacancy})
+
+
+def vacancy_edit_django(request, id):
+    vacancy_object = Vacancy.objects.get(id=id)
+
+    if request.method == "GET":
+        edit_vacancy_form = VacancyEditDj(instance=vacancy_object)
+        return render(request, "vacancy/vacancy_edit_django.html", {"edit_vacancy_form": edit_vacancy_form})
+
+    elif request.method == "POST":
+        edit_vacancy_form = VacancyEditDj(data=request.POST, instance=vacancy_object)
+        if edit_vacancy_form.is_valid():
+            obj = edit_vacancy_form.save()
+            return redirect('vacancy', id=obj.id)
+        else:
+            return HttpResponse("error?")
+
+
+def add_company(request):
+    if request.method == 'POST':
+        form = CompanyAdd(request.POST)
+        if form.is_valid():
+            new_company = form.save()
+            return redirect('company-details', id=new_company.id)
+
+    company_form = CompanyAdd()
+    return render(request, 'company/add_company.html', {'company_form': company_form})
+
+
+def company_details(request, id):
+    company = Company.objects.get(id=id)
+    return render(request, 'company/company_details.html', {'company': company})
+
+
+def company_list(request):
+    companies = Company.objects.all()
+    return render(request, 'company/all_company_list.html', {'companies': companies})
+
+
+def edit_company(request, id):
+    company_object = Company.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = CompanyEdit(data=request.POST, instance=company_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect('company-details', id=obj.id)
+    else:
+        form = CompanyEdit(instance=company_object)
+    return render(request, 'company/edit_company.html', {'form': form, 'company_object': company_object})
+

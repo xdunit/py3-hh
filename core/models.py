@@ -38,9 +38,13 @@ class Category(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
+    founding_date = models.DateField(auto_now_add=True)
     address = models.CharField(max_length=255)
+    workers = models.ManyToManyField(to=Worker)
     employees_num = models.SmallIntegerField(null=False)
     is_hunting = models.BooleanField(default=True, verbose_name='Есть вакансии?')
 
     def __str__(self):
         return self.name
+
+

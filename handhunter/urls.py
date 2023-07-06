@@ -21,25 +21,45 @@ from worker.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage),
-    path('about/', about),
-    path('contacts/', contacts),
-    path('address/', address),
-    path('vacancies/', vacancy_list),
-    path('companies/', company_list),
-    path('workers/', workers_list),
-    path('worker/<int:id>/', worker_info),
-    path('resume-list/', resume_list),
-    path('resume-info/<int:id>/', resume_info),
-    path('my-resume/', my_resume, name='my-resume'),
-    path('vacancy/<int:id>/', vacancy_details),
-    path('search/', search, name='search'),
-    path('add-resume/', add_resume, name='add-resume'),
+
     path('registration/', reg_view, name='reg'),
+
+    path('', homepage),
+
+    path('about/', about),
+
+    path('contacts/', contacts),
+
+    path('search/', search, name='search'),
+
+    path('address/', address),
+
+
+    path('vacancies/', vacancy_list),
+    path('vacancy/<int:id>/', vacancy_details, name='vacancy'),
     path('add-vacancy/', add_vacancy, name='add_vacancy'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
-    path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
     path('add-vacancy-df/', vacancy_add_via_django_form, name='add-vacancy-df'),
-    path('edit-resume-django', edit_resume_django, name='edit-resume-django')
+    path('edit-vacancy-django/<int:id>/', vacancy_edit_django, name='edit-vacancy-django'),
+
+
+
+    path('add-company/', add_company, name='add-company'),
+    path('company-list/', company_list, name='company-list'),
+    path('edit-company/<int:id>', edit_company, name='edit-company'),
+    path('company-details/<int:id>/', company_details, name='company-details'),
+
+
+    path('workers/', workers_list),
+    path('worker/<int:id>/', worker_info),
+
+
+    path('resume-list/', resume_list),
+    path('resume-info/<int:id>/', resume_info, name='resume-info'),
+    path('my-resume/', my_resume, name='my-resume'),
+    path('add-resume/', add_resume, name='add-resume'),
+    path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
+    path('edit-resume-django', edit_resume_django, name='edit-resume-django'),
+    path('add-resume-django', add_resume_django, name='add-resume-django')
 
 ]

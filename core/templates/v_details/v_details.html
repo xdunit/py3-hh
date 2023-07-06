@@ -8,5 +8,6 @@
     {% endfor %}
     </ul>
     <a href="{% url 'vacancy-edit' vacancy.id %}">Изменить</a>
+    <a href="{% url 'edit-vacancy-django' id=vacancy.id %}">Изменить через django</a>
 
 {% endblock %}

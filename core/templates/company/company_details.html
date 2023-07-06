@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Детали компании</h1>
+    <h2>{{ company.name }}</h2>
+    <p>Дата основания: {{ company.founding_date }}</p>
+    <p>Сотрудники:</p>
+    <ul>
+        {% for worker in company.workers.all %}
+            <li>{{ worker.name }} - {{ worker.specialization }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'edit-company' id=company.id %}">Редактировать</a>
+
+{% endblock %}

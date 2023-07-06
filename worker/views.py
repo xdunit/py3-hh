@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import Worker
 from .models import Resume
 from .forms import ResumeEditForm
+from .forms import ResumeAdd
 
 
 # Create your views here.
@@ -22,10 +23,8 @@ def worker_info(request, id):
 
 
 def resume_list(request):
-    resume_query = Resume.objects.all()
-    return render(request, 'resume/resume_list.html',
-                  {"resumes": resume_query}
-                  )
+    resumes = Resume.objects.all()
+    return render(request, 'resume/resume_list.html', {'resumes': resumes})
 
 
 def resume_info(request, id):
@@ -84,6 +83,19 @@ def edit_resume_django(request, id):
         form = ResumeEditForm(data=request.POST, instance=resume_object)
         if form.is_valid():
             obj = form.save()
-            return redirect(resume_info, id=obj.id)
+            return redirect('resume_info', id=obj.id)
         else:
             return HttpResponse("Форма не валидна")
+
+
+def add_resume_django(request):
+    if request.method == 'POST':
+        add_resume_form = ResumeAdd(request.POST)
+        if add_resume_form.is_valid():
+            new_resume = add_resume_form.save()
+            return redirect('resume-info', id=new_resume.id)
+
+    add_resume_form = ResumeAdd()
+    return render(request, 'resume/add_resume_django.html', {'add_resume_form': add_resume_form})
+
+

@@ -4,11 +4,13 @@ from .models import Company
 from .models import Category
 
 
+
 # Register your models here.
 
 
 admin.site.register(Vacancy)
 admin.site.register(Company)
 admin.site.register(Category)
+
 
 

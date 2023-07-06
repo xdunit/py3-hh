@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ add_resume_form.as_p }}
+        <button>Добавить</button>
+    </form>
+
+{% endblock %}
