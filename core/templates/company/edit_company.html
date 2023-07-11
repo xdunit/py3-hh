@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Редактирование компании</h1>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>Сохранить</button>
-    </form>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Название</label>
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        <label for="id_address" class="form-label">Адрес</label>
+        {{ form.address }}
+    </div>
+    <div class="mb-3">
+        <label for="id_workers" class="form-label">Работники</label>
+        {{ form.workers }}
+    </div>
+    <div class="mb-3">
+        <label for="id_employees_num" class="form-label">Employees num</label>
+        {{ form.employees_num }}
+    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="id_is_hunting" name="is_hunting">
+        <label class="form-check-label" for="id_is_hunting">Есть вакансии</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Изменить</button>
+</form>
+
 {% endblock %}

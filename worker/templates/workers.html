@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Сотрудники</h1>
+    <h1 class ="candidate-title">Сотрудники</h1>
     {% for i in workers %}
         <div>{{ i.name }} - {{ i.specialization }} - {{ i.is_searching }}</div>
     {% endfor %}
