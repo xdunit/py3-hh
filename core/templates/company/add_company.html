@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 
 <form method="POST">
     {% csrf_token %}
+    {% bootstrap_form company_form %}
     <div class="mb-3">
         <label for="name" class="form-label">Название</label>
         {{ company_form.name }}

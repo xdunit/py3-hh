@@ -76,7 +76,9 @@
                             django</a>
                         </li>
                     </ul>
-
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sign-out' %}">Выйти</a>
                 </li>
                 <li class="nav-item">
                     <span class="welcome-message">Привет, {{ request.user.username }}!</span>
@@ -85,7 +87,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'reg' %}">Регистрация</a>
                 </li>
-                Пожалуйста, авторизуйтесь
+                <li class="nav-item">
+                    <span class="auth-message">Пожалуйста, авторизуйтесь!</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sign-in' %}">Вход</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
@@ -103,14 +110,22 @@
 </div>
 <hr>
 
+{% block custom_container %}
 
-{% block content %}
+<div>
+    {% block content %}
+    {% endblock %}
+</div>
+
 {% endblock %}
+
 <br>
 <footer>
     <hr>
-    88005355<br/>
-    Адрес: Бишкек, 7 м-н
+    <div>88005355</div>
+
+    <div>Адрес: Бишкек, 7 м-н</div>
+    <br/>
 </footer>
 </body>
 </html>

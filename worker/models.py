@@ -30,6 +30,8 @@ class Resume(models.Model):
     age = models.SmallIntegerField(null=False)
     specialization = models.CharField(max_length=255)
     info = models.TextField(verbose_name='Расскажите о себе')
+    profile_photo = models.ImageField(null=True, blank=True, upload_to='profile_photo/',
+                                      verbose_name='Фото сотрудника')
 
     def __str__(self):
         return self.specialization

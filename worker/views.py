@@ -41,7 +41,7 @@ def my_resume(request):
                       {"resumes": resume_query}
                       )
     else:
-        return redirect('homepage')
+        return redirect('/')
 
 
 def add_resume(request):
@@ -60,16 +60,31 @@ def add_resume(request):
 
 def resume_edit(request, id):
     resume = Resume.objects.get(id=id)
-    if request.method == 'POST':
-        resume.name.name = request.POST['name']
-        resume.age = int(request.POST['age'])
-        resume.specialization = request.POST['specialization']
-        resume.info = request.POST['info']
-        resume.name.save()
-        resume.save()
-        return redirect(f'/resume-info/{resume.id}/')
 
-    return render(request, 'resume/resume_edit.html', {'resume': resume})
+    if request.method == "GET":
+        form = ResumeEditForm(instance=resume)
+        return render(request, "resume/resume_edit.html", {"form": form})
+
+    elif request.method == "POST":
+        form = ResumeEditForm(
+            data=request.POST,
+            instance=resume,
+            files=request.FILES
+        )
+        if form.is_valid():
+            obj = form.save()
+            return redirect(resume_info, id=obj.id)
+
+    # if request.method == 'POST':
+    #     resume.name.name = request.POST['name']
+    #     resume.age = int(request.POST['age'])
+    #     resume.specialization = request.POST['specialization']
+    #     resume.info = request.POST['info']
+    #     resume.name.save()
+    #     resume.save()
+    #     return redirect(f'/resume-info/{resume.id}/')
+    #
+    # return render(request, 'resume/resume_edit.html', {'resume': resume})
 
 
 def edit_resume_django(request, id):
@@ -97,5 +112,3 @@ def add_resume_django(request):
 
     add_resume_form = ResumeAdd()
     return render(request, 'resume/add_resume_django.html', {'add_resume_form': add_resume_form})
-
-

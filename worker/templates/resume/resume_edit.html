@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="Resume name" value="{{ resume.name }}"><br><br>
-    <input type="number" name="age" placeholder="Age" value="{{ resume.age }}"><br><br>
-    <textarea name="specialization" cols="20" rows="5" placeholder="Специализация">{{ resume.specialization }}</textarea><br><br>
-    <input type="text" name="info" placeholder="Информация о вас" value="{{ resume.info }}"><br><br>
-    <button>Изменить</button>
+<!--<form method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="text" name="name" placeholder="Resume name" value="{{ resume.name }}"><br><br>-->
+<!--    <input type="number" name="age" placeholder="Age" value="{{ resume.age }}"><br><br>-->
+<!--    <textarea name="specialization" cols="20" rows="5" placeholder="Специализация">{{ resume.specialization }}</textarea><br><br>-->
+<!--    <input type="text" name="info" placeholder="Информация о вас" value="{{ resume.info }}"><br><br>-->
+<!--    <button>Изменить</button>-->
+<!--</form>-->
 
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Сохранить изменения</button>
 </form>
 
 {% endblock %}

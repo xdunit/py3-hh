@@ -5,6 +5,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Skill(models.Model):
+    skill_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.skill_name
+
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=255)
@@ -17,9 +23,26 @@ class Vacancy(models.Model):
     review = models.ManyToManyField(to=User, blank=True)
     category = models.ForeignKey(to='Category', null=True, blank=False, verbose_name='категория',
                                  on_delete=models.SET_NULL)
+    experience = models.IntegerField(null=True, blank=True)
+
+    FULL_TIME = 'full'
+    PART_TIME = 'part'
+    COMPLETED_WORK = 'comp'
+    EMPLOYMENT_TYPE_CHOICES = [
+        (FULL_TIME, 'Полный рабочий день'),
+        (PART_TIME, 'Частичная занятость'),
+        (COMPLETED_WORK, 'Сделанная работа')
+    ]
+
+    employment_type = models.CharField(
+        max_length=4,
+        choices=EMPLOYMENT_TYPE_CHOICES,
+        default=FULL_TIME
+    )
+    skill_name = models.ManyToManyField(to=Skill, blank=True)
 
     def __str__(self):
-        return self.title
+        return {self.title} - {self.employment_type}
 
     class Meta:
         verbose_name = 'Вакансия'
@@ -46,5 +69,6 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
 
 

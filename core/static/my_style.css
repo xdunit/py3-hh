@@ -1,5 +1,5 @@
 h1,h2 {
-    color: #016878;
+    color: #FF0000;
 }
 
 .candidate-title {
@@ -10,28 +10,29 @@ h1,h2 {
     color: white;
 }
 
-/* Пример пользовательских стилей */
-form {
-  margin-top: 4px;
+.auth-message {
+    color:white;
 }
 
-label {
-  font-weight: bold;
+.homepage {
+    background:
+            linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),
+            url("banner.jpg")
+            center / cover;
+    padding: 10px;
+    height: 90vh;
+    color: blue;
 }
 
-input[type="text"],
-input[type="number"] {
-  width: 10%;
-  padding: 2px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.homepage h1 {
+    color: blue;
 }
 
-.checkbox-label {
-  display: block;
-  font-weight: normal;
+.my-input {
+    width: 150px !important;
 }
 
-button {
-  margin-top: 5px;
+.form-control {
+    width: 150px;
 }
+

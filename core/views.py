@@ -5,8 +5,11 @@ from .forms import VacancyForm
 from .forms import VacancyEditDj
 from .forms import CompanyAdd
 from .forms import CompanyEdit
+from .filters import VacancyFilter
+
 
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
@@ -30,9 +33,13 @@ def address(request):
 
 
 def vacancy_list(request):
-    vacancies = Vacancy.objects.all()  # SELECT in django ORM
-    context = {'vacancies': vacancies}  # context data for jinja2
+    # vacancies = Vacancy.objects.all()  # SELECT in django ORM
+    # context = {'vacancies': vacancies}  # context data for jinja2
     # context['example'] = 'hello world'
+
+    vacancy_filter = VacancyFilter(request.GET, queryset=Vacancy.objects.all())
+    context = {'vacancy_filter': vacancy_filter}
+
     return render(request, 'vacancies.html', context)
 
 
@@ -47,7 +54,7 @@ def vacancy_details(request, id):
 
 def search(request):
     word = request.GET["keyword"]
-    vacancy_list = Vacancy.objects.filter(title__contains=word)
+    vacancy_list = Vacancy.objects.filter(title__icontains=word)
     context = {'vacancies': vacancy_list}
     return render(request, 'vacancies.html', context)
 
@@ -63,6 +70,24 @@ def reg_view(request):
         return HttpResponse('Готово')
 
     return render(request, 'auth/registr.html')
+
+
+def sign_in(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('/')
+        else:
+            return HttpResponse('Неверный логин или пароль')
+    return render(request, 'auth/sign_in.html')
+
+
+def sign_out(request):
+    logout(request)
+    return redirect(sign_in)
 
 
 def add_vacancy(request):
@@ -155,4 +180,3 @@ def edit_company(request, id):
     else:
         form = CompanyEdit(instance=company_object)
     return render(request, 'company/edit_company.html', {'form': form, 'company_object': company_object})
-

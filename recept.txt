@@ -43,3 +43,6 @@ python manage.py migrate
 
 #добавляем его в админку
 
+#перенос базы
+python -Xutf8 manage.py dumpdata --exclude=contenttypes > data.json
+python manage.py loaddata data.json

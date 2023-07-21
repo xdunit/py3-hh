@@ -1,15 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <form method="POST">
+<form method="POST">
     {% csrf_token %}
-    <input type="text" name="title" placeholder="title of vacancy" required><br><br>
-    <input type="number" name="salary" placeholder="Зарплата"><br><br>
-    <textarea name="description" cols="20" rows="5" placeholder="Описание"></textarea><br><br>
-    <input type="text" name="is_relevant" placeholder="is_relevant: True or False"><br><br>
-    <input type="email" name="email" placeholder="email"><br><br>
-    <input type="text" name="contacts" placeholder="contacts"><br><br>
-    <button>Добавить</button>
-  </form>
+    <div class="mb-3 mt-3">
+        <label for="title" class="form-label">Заголовок:</label>
+        <input type="text" name="title" class="form-control" id="title" placeholder="Заголовок" required>
+    </div>
 
-{% endblock %}
+    <div class="mb-3">
+        <label for="salary" class="form-label">Желаемая зарплата:</label>
+        <input type="number" id="salary" name="salary" class="form-control" placeholder="Укажите сумму">
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="description" class="form-label">Описание:</label>
+        <textarea name="description" cols="20" id="description" class="form-control" rows="3"
+                  placeholder="description"></textarea>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="is_relevant" class="form-label">is_relevant</label>
+        <input type="text" class="form-control" name="is_relevant" id="is_relevant" placeholder="True or False">
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Почта</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="email">
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="contacts" class="form-label">Контакты:</label>
+        <input type="text" name="contacts" class="form-control" id="contacts" placeholder="contacts">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+
+    <!--    <input type="text" name="title" placeholder="title of vacancy" required><br><br>-->
+    <!--    <input type="number" name="salary" placeholder="Зарплата"><br><br>-->
+    <!--    <textarea name="description" cols="20" rows="5" placeholder="Описание"></textarea><br><br>-->
+    <!--    <input type="text" name="is_relevant" placeholder="is_relevant: True or False"><br><br>-->
+    <!--    <input type="email" name="email" placeholder="email"><br><br>-->
+    <!--    <input type="text" name="contacts" placeholder="contacts"><br><br>-->
+    <!--    <button>Добавить</button>-->
+    <!--  </form>-->
+
+    {% endblock %}
