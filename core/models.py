@@ -42,7 +42,7 @@ class Vacancy(models.Model):
     skill_name = models.ManyToManyField(to=Skill, blank=True)
 
     def __str__(self):
-        return {self.title} - {self.employment_type}
+        return f"{self.title} - {self.get_employment_type_display()}"
 
     class Meta:
         verbose_name = 'Вакансия'
