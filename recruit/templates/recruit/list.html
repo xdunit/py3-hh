@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Recruit List</h1>
+    {% for rec in recruiters %}
+    <div>
+        <a href="{% url 'recruiter-detail' rec.pk %}"> {{ rec.user.username }} - {{ rec.city }} - {{ rec.country }}</a> --
+        <a href="{% url 'recruiter-edit' rec.pk %}">Изменить</a>
+    </div>
+
+    {% empty %}
+        <div>Записей пока нет</div>
+    {% endfor %}
+    <hr>
+    <div><a href="{% url 'create-recruiter' %}">Создать</a></div>
+
+{% endblock %}

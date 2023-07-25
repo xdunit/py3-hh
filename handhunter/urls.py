@@ -15,11 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core.views import *
 from worker.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
@@ -65,7 +66,10 @@ urlpatterns = [
     path('add-resume/', add_resume, name='add-resume'),
     path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
     path('edit-resume-django', edit_resume_django, name='edit-resume-django'),
-    path('add-resume-django', add_resume_django, name='add-resume-django')
+    path('add-resume-django', add_resume_django, name='add-resume-django'),
+
+    path('recruit/', include('recruit.urls'), name='recruit'),
+    path('login-generic/', LoginView.as_view(), name='login-generic'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # ...:8000/static/my_style.css # .../handhunter/core/static/my_style.css

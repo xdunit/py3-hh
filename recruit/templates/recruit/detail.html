@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Рекрутер:{{ recruiter_object.user.username }}</h1>
+<div>Город: {{ recruiter_object.city }}</div>
+<div>Страна: {{ recruiter_object.country|default_if_none:'не указано' }}</div>
+<div>Платеж: {{ recruiter_object.payment_for_found }}</div>
+<div>Процент: {{ recruiter_object.bonus_percent }}</div>
+
+<a href="{% url 'recruiter-edit' recruiter_object.pk %}">Изменить детали рекрутера</a>
+
+{% endblock %}
