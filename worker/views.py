@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Worker
 from .models import Resume
 from .forms import ResumeEditForm
-from .forms import ResumeAdd
+from .forms import ResumeAdd, WorkerAdd
 
 
 # Create your views here.
@@ -21,6 +21,17 @@ def worker_info(request, id):
     context = {'worker': worker_object,
                'vacancies': vacancies}
     return render(request, 'worker.html', context)
+
+
+def worker_create(request):
+    if request.method == 'POST':
+        worker_create_form = WorkerAdd(request.POST)
+        if worker_create_form.is_valid():
+            new_worker = worker_create_form.save()
+            return redirect('workers/', id=new_worker.id)
+
+    worker_create_form = WorkerAdd()
+    return render(request, 'worker/worker_add.html', {'worker_create_form': worker_create_form})
 
 
 def resume_list(request):
@@ -51,8 +62,11 @@ def add_resume(request):
     if request.method == "GET":
         return render(request, template)
     elif request.method == 'POST':
+        worker = request.user.worker
+        if not worker:
+            return redirect('create_worker')
         new_resume = Resume()
-        new_resume.name = request.user.worker
+        new_resume.name = worker
         new_resume.age = request.POST['form-age']
         new_resume.specialization = request.POST['form-spec']
         new_resume.info = request.POST['form-info']

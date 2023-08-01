@@ -10,13 +10,19 @@ from .filters import VacancyFilter
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
 
 
 def homepage(request):
-    return render(request=request, template_name="index.html")
+    if request.method == 'POST':
+        return HttpResponse('Metod ne razrewon', status=405)
+    context = {}
+    context['vacancies'] = Vacancy.objects.all()[:5]
+    context['companies'] = Company.objects.all()[:3]
+    return render(request=request, template_name="index.html", context=context)
 
 
 def about(request):
@@ -44,7 +50,10 @@ def vacancy_list(request):
 
 
 def vacancy_details(request, id):
-    vacancy = Vacancy.objects.get(id=id)
+    try:
+        vacancy = Vacancy.objects.get(id=id)  # 1
+    except ObjectDoesNotExist:
+        return HttpResponse("Укажите верное id", status=404)
     candidates = vacancy.candidate.all()
     context = {'vacancy': vacancy,
                'candidates': candidates}

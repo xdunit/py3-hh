@@ -58,6 +58,7 @@ urlpatterns = [
 
     path('workers/', workers_list),
     path('worker/<int:id>/', worker_info),
+    path('add-worker/', worker_create, name='add_worker'),
 
 
     path('resume-list/', resume_list),
@@ -65,8 +66,8 @@ urlpatterns = [
     path('my-resume/', my_resume, name='my-resume'),
     path('add-resume/', add_resume, name='add-resume'),
     path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
-    path('edit-resume-django', edit_resume_django, name='edit-resume-django'),
-    path('add-resume-django', add_resume_django, name='add-resume-django'),
+    path('edit-resume-django/', edit_resume_django, name='edit-resume-django'),
+    path('add-resume-django/', add_resume_django, name='add-resume-django'),
 
     path('recruit/', include('recruit.urls'), name='recruit'),
     path('login-generic/', LoginView.as_view(), name='login-generic'),
