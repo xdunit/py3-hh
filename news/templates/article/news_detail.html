@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <html>
+<head>
+    <title>News Detail</title>
+</head>
+<body>
+    <h1>Title: {{ news_detail.title }}</h1>
+    <p>Text: {{ news_detail.text }}</p>
+    <p>Author: {{ news_detail.author }}</p>
+    <p>Created at: {{ news_detail.created_at }}</p>
+    <p>Updated at: {{ news_detail.updated_at }}</p>
+    <p>Views: {{ news_detail.views_count }}</p>
+
+    <form method="post" action="{% url 'article_update' news_detail.pk %}">
+        {% csrf_token %}
+        <button type="submit">Edit News</button>
+    </form>
+</body>
+</html>
+{% endblock %}
