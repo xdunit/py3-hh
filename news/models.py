@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 
@@ -19,3 +20,8 @@ class ArticleNew(models.Model):
     views_count = models.PositiveIntegerField(default=0)
     likes_users = models.ManyToManyField(to=User, blank=True)
 
+
+class NewsView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(ArticleNew, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)

@@ -1,4 +1,4 @@
-python -m venv venv
+﻿python -m venv venv
 call source\Scripts\activate
 pip install django
 pip freeze > requirements.txt
@@ -46,3 +46,23 @@ python manage.py migrate
 #перенос базы
 python -Xutf8 manage.py dumpdata --exclude=contenttypes > data.json
 python manage.py loaddata data.json
+
+
+
+#git commands
+# стянуть изменения 
+# git pull
+
+# создание ветки и переключение на нее
+#
+ branch name
+
+# узнать ветку
+# git branch
+
+
+
+
+
+
+
